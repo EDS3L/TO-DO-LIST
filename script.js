@@ -6,28 +6,43 @@ const toDoInput1 = document.querySelector('.todo-input')
 
 
 
-let newToDo
+
 let toDoInput
 let errorInfo
 let ulList
 let btnComp
 
+let popUp
 
-const adding = () => {
+
+const main = () => {
+    allElements()
+    events()
+}
+
+const allElements = () => {
     toDoInput = document.querySelector('.todo-input')
     errorInfo = document.querySelector('.error-info')
     ulList = document.querySelector('.todolist ul')
-    
+    popUp = document.querySelector('.popup')
+}
 
+const events = () => {
+    btnAdd.addEventListener('click', adding)
+    ulList.addEventListener('click', radar)
+}
+
+
+const adding = () => {
 
 
     if(toDoInput.value !== '') {
-        newToDo = document.createElement('li')
+        const newToDo = document.createElement('li')
         newToDo.textContent = toDoInput.value
         ulList.append(newToDo)
         toDoInput.value = ''
 
-        createTools()
+        createTools(newToDo)
         if(newToDo !== '') {
             errorInfo.textContent = ''
         }
@@ -39,7 +54,8 @@ const adding = () => {
 
 }
 
-const createTools = () => {
+const createTools = (newToDo) => {
+    
     const div = document.createElement('div')
     newToDo.append(div)
     div.classList.add('tools')
@@ -49,7 +65,7 @@ const createTools = () => {
     buttonCompelte.classList.add('complete')
     buttonCompelte.innerHTML = '<i class="fas fa-check"></i>'
     div.append(buttonCompelte)
-    buttonCompelte.addEventListener('click', taskComplete)
+  
 
     const buttonEdit = document.createElement('button')
     buttonEdit.classList.add('edit') 
@@ -60,21 +76,27 @@ const createTools = () => {
     buttonDelete.classList.add('delete') 
     buttonDelete.innerHTML = '<i class="fas fa-times"></i>'
     div.append(buttonDelete)
-    buttonDelete.addEventListener('click', removeTask)
+    
     
 }
 
 
-
-const removeTask = () => {
-    newToDo.remove()
-}
-
-const taskComplete = () => {
+const radar = (e) => {
+   
+    if(e.target.matches('.complete')) {
+        e.target.closest('li').classList.toggle('completed')
+        e.target.classList.toggle('completed')
+    } else if (e.target.matches('.edit')) {
+        EDIT()
+    } else if (e.target.matches('.delete')) {
+        e.target.closest('li').remove()
+    }
     
-    newToDo.classList.toggle('completed')
+}
+
+const EDIT = () => {
+    popUp.style.display = 'flex'
 }
 
 
-
-btnAdd.addEventListener('click', adding)
+document.addEventListener('DOMContentLoaded', main)
