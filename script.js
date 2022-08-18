@@ -12,7 +12,7 @@ let popUp
 let btnCancle
 let btnAccept
 let popUpInfo
-let popUpText
+let popUpInput
 
 let toDoEdit
 
@@ -32,7 +32,7 @@ const allElements = () => {
     btnCancle = document.querySelector('.cancel')
     btnAccept = document.querySelector('.accept')
     popUpInfo = document.querySelector('.popup-body').firstChild
-    popUpText = document.querySelector('.popup-input')
+    popUpInput = document.querySelector('.popup-input')
 
 }
 
@@ -41,7 +41,21 @@ const events = () => {
     ulList.addEventListener('click', radar)
     btnCancle.addEventListener('click', closePopUp)
     btnAccept.addEventListener('click',accept)
+    toDoInput.addEventListener("keypress", (e)=> {
+        if (e.key === 'Enter') { 
+            adding()
+        }
+    });
+    popUpInput.addEventListener("keypress", (e)=> {
+        if(e.key === 'Enter') {
+            accept()
+            toDoInput.focus()
+        }
+    })
+    
 }
+
+
 
 
 
@@ -55,13 +69,15 @@ const adding = () => {
         toDoInput.value = ''
 
         createTools(newToDo)
+        
         if(newToDo !== '') {
             errorInfo.textContent = ''
+            
         }
     } else {
         errorInfo.textContent = 'Wpisz treść!'
     }
-
+    toDoInput.focus()
     
 
 }
@@ -101,15 +117,20 @@ const radar = (e) => {
         e.target.classList.toggle('completed')
     } else if (e.target.matches('.edit')) {
         EDIT(e)
+        popUpInput.focus()
     } else if (e.target.matches('.delete')) {
         e.target.closest('li').remove()
+        if(ulList.getElementsByTagName('li').length <= 0) {
+            errorInfo.textContent = 'Brak zadań na liście.'
+        }
+        
     }
     
 }
 
 const EDIT = (e) => {
     toDoEdit = e.target.closest('li');
-    popUpText.value = toDoEdit.firstChild.textContent
+    popUpInput.value = toDoEdit.firstChild.textContent
     popUp.style.display = 'flex'
     popUpInfo.textContent = ''
 }
@@ -120,9 +141,10 @@ const closePopUp = () => {
 }
 
 const accept = () => {
-    if(popUpText.value !== '') {
-        toDoEdit.firstChild.textContent = popUpText.value
+    if(popUpInput.value !== '') {
+        toDoEdit.firstChild.textContent = popUpInput.value
         popUp.style.display = 'none'
+        toDoInput.focus()
     } else {
         popUpInfo.textContent = 'wpisz tekst'
     }
