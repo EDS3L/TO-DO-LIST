@@ -5,19 +5,23 @@
 }
 
 :root {
-    --deep-dark: rgb(26, 26, 26);
-    --light-dark: rgb(79, 82, 92);
-    --light-blue: rgb(0, 132, 255);
-    --dark-blue: rgb(2, 84, 161);
-    --light: rgb(245, 245, 245);
+    --deep-dark: rgb(41, 47, 54);
+    --light-dark: rgb(41, 47, 54);
+    --light-blue: rgb(78, 205, 196);
+    --light: rgb(255, 255, 255);
+    --tomato: rgb(255, 107, 107)
+}
+
+::placeholder {
+    font-family: 'Montserrat', sans-serif;
 }
 
 body {
     display: flex;
     justify-content: center;
-    margin-top: 120px;
+    margin-top: 80px;
     font-family: 'Montserrat', sans-serif;
-    background-color: var(--light);
+    background-color: var(--tomato);
 }
 
 h1 {
@@ -31,7 +35,7 @@ h1 {
 }
 
 .todo {
-    width: 800px;
+    width: 80%;
     border-radius: 5px;
     background: #fff;
     box-shadow: 4px 4px 5px rgba(82, 82, 82, .4);
@@ -41,7 +45,7 @@ h1 {
 .header {
     border-radius: 5px 5px 0 0;
     padding: 40px;
-    background-image: linear-gradient(340deg, #045de9 0%, #09c6f9 100%);
+    background-color: var(--deep-dark)
 }
 
 .todo-input {
@@ -52,6 +56,8 @@ h1 {
     border-radius: 5px;
     color: var(--light-dark);
     background-color: var(--light);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
 }
 
 .error-info {
@@ -71,8 +77,9 @@ h1 {
 }
 
 .btn-add:hover {
-    color: #fff;
-    background-color: var(--light-dark);
+    color: var(--deep-dark);
+    background-color: var(--tomato);
+    
 }
 
 .todolist {
@@ -92,7 +99,13 @@ h1 {
     padding-left: 20px;
     text-align: left;
     list-style: none;
-    background-color: var(--light);
+    background-color: var(--tomato);
+    border: 1px solid var(--tomato);
+    border-radius: 10px;
+    font-family: 'Montserrat', sans-serif;
+    color: var(--deep-dark);
+    font-size: 18px;
+    font-weight: bold;
 }
 
 .tools {
@@ -104,24 +117,33 @@ h1 {
     border: none;
     background-color: transparent;
     cursor: pointer;
-    transition: background-color .3s;
+    
 }
 
 .tools button:hover {
-    background-color: #ddd;
+    background-color: rgb(180, 36, 36);
+    border-radius: 10px;
 }
 
 .complete {
-    color: var(--light-blue);
+    color: var(--dark-blue);
+    background-color: var(--tomato);
+}
+
+.taskStyle {
+    border: solid 1px var(--tomato);
+    border-radius: 10px;
+    background-color: var(--tomato);
+    
 }
 
 .edit {
     font-weight: bold;
-    color: rgb(15, 179, 69);
+    color: var(--dark-blue);
 }
 
 .delete {
-    color: tomato;
+    color: var(--dark-blue)
 }
 
 .completed {
@@ -187,8 +209,8 @@ h1 {
 }
 
 .popup-btn:hover {
-    color: #fff;
-    background-color: var(--light-blue);
+    color: var(--deep-dark);
+    background-color: var(--tomato);
 }
 
 
